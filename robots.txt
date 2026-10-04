@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nomena06.github.io/portoflio-/sitemap.xml
