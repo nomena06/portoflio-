@@ -3,11 +3,12 @@
 Single-page portfolio for freelance work in **Odoo ERP**, **Excel VBA automation**
 and **.NET** development.
 
-**Live site:** https://YOUR-SITE.netlify.app/
+**Live site:** https://ramananarivo.netlify.app/
 
 > The public URL appears in five places: `index.html` (`og:url`, `og:image`,
-> `canonical`), `robots.txt`, `sitemap.xml` and this line. Replace them in one go:
-> `grep -rl YOUR-SITE.netlify.app . | xargs sed -i 's|YOUR-SITE.netlify.app|your-real-subdomain.netlify.app|g'`
+> `canonical`), `robots.txt`, `sitemap.xml` and the line above. If the domain
+> ever changes, update them in one go:
+> `grep -rl ramananarivo.netlify.app . | xargs sed -i 's|ramananarivo.netlify.app|new-domain|g'`
 
 ## Structure
 
