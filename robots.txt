@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ramananarivo.netlify.app/sitemap.xml
