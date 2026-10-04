@@ -3,7 +3,11 @@
 Single-page portfolio for freelance work in **Odoo ERP**, **Excel VBA automation**
 and **.NET** development.
 
-**Live site:** https://nomena06.github.io/portoflio-/
+**Live site:** https://YOUR-SITE.netlify.app/
+
+> The public URL appears in five places: `index.html` (`og:url`, `og:image`,
+> `canonical`), `robots.txt`, `sitemap.xml` and this line. Replace them in one go:
+> `grep -rl YOUR-SITE.netlify.app . | xargs sed -i 's|YOUR-SITE.netlify.app|your-real-subdomain.netlify.app|g'`
 
 ## Structure
 
@@ -14,7 +18,15 @@ js/main.js        # theme toggle, EN/FR switch, nav, scroll reveal, contact form
 assets/img/       # project screenshots
 assets/favicon.ico
 robots.txt, sitemap.xml, ads.txt
+netlify.toml      # Netlify: publish root, cache + security headers, no build
 ```
+
+## Deployment
+
+Hosted on Netlify, deployed straight from this repository — there is no build
+step, `netlify.toml` publishes the repository root as-is. Netlify rebuilds the
+site on every push to the production branch set in **Site settings → Build &
+deploy → Branches**.
 
 No build step and no framework: open `index.html` in a browser, or serve the
 folder with `python3 -m http.server 8080`.
