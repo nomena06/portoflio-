@@ -1,0 +1,20 @@
+{
+  "name": "lire-avec-pio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Méthode de lecture CP : lettres, sons, syllabes, mots, phrases, histoires.",
+  "scripts": {
+    "data": "node tools/build-data.mjs",
+    "audio-list": "node tools/audio-list.mjs",
+    "serve": "python3 -m http.server 8080 --directory app"
+  },
+  "dependencies": {
+    "@capacitor-community/text-to-speech": "^8.0.2",
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/core": "^8.5.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.0"
+  }
+}

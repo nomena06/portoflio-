@@ -1,0 +1,7 @@
+{
+  "appId": "fr.nomena.lirepio",
+  "appName": "Lire avec Pio",
+  "webDir": "app",
+  "server": { "androidScheme": "https" },
+  "android": { "backgroundColor": "#fff8ec" }
+}

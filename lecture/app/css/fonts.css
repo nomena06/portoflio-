@@ -1,0 +1,4 @@
+/* Polices incluses (SIL Open Font License) : Andika (lecture) et Playwrite FR Moderne (cursive scolaire). */
+@font-face { font-family: 'Andika'; font-weight: 400; font-style: normal; font-display: swap; src: url('../fonts/andika-400.woff2') format('woff2'); }
+@font-face { font-family: 'Andika'; font-weight: 700; font-style: normal; font-display: swap; src: url('../fonts/andika-700.woff2') format('woff2'); }
+@font-face { font-family: 'Playwrite FR'; font-weight: 400; font-style: normal; font-display: swap; src: url('../fonts/playwrite-400.woff2') format('woff2'); }
