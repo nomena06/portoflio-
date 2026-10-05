@@ -51,12 +51,7 @@ jobs:
           open(p, 'w', encoding='utf-8').write(s)
           PY
           rm -rf android/app/src/main/res/mipmap-anydpi-v26
-          for pair in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
-            d=android/app/src/main/res/mipmap-${pair%%:*}
-            mkdir -p "$d"
-            convert app/icons/icon-512.png -resize ${pair##*:}x${pair##*:} "$d/ic_launcher.png"
-            cp "$d/ic_launcher.png" "$d/ic_launcher_round.png"
-          done
+          cp -r android-res/mipmap-* android/app/src/main/res/
 
       - name: Synchroniser l'application web
         run: npx cap sync android
