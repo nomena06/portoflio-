@@ -1,0 +1,70 @@
+name: Android APK (Lire avec Pio)
+
+on:
+  push:
+    branches: [claude/android-apk]
+    paths: ['lecture/**', '.github/workflows/android-apk.yml']
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lecture
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: SDK Android - licences et plateforme
+        run: |
+          SDKM=$(ls -d "${ANDROID_HOME:-/usr/local/lib/android/sdk}"/cmdline-tools/*/bin/sdkmanager | sort -V | tail -1)
+          echo "sdkmanager: $SDKM"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund
+
+      - name: Valider le contenu pédagogique
+        run: node tools/build-data.mjs
+
+      - name: Créer le projet Android
+        run: npx cap add android
+
+      - name: Voix française (Android 11+) et icône
+        run: |
+          python3 - <<'PY'
+          p = 'android/app/src/main/AndroidManifest.xml'
+          s = open(p, encoding='utf-8').read()
+          q = '<queries><intent><action android:name="android.intent.action.TTS_SERVICE"/></intent></queries>\n    '
+          if 'TTS_SERVICE' not in s:
+              s = s.replace('<application', q + '<application', 1)
+          open(p, 'w', encoding='utf-8').write(s)
+          PY
+          rm -rf android/app/src/main/res/mipmap-anydpi-v26
+          cp -r android-res/mipmap-* android/app/src/main/res/
+
+      - name: Synchroniser l'application web
+        run: npx cap sync android
+
+      - name: Construire l'APK
+        working-directory: lecture/android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Renommer l'APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk lire-avec-pio.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lire-avec-pio-apk
+          path: lecture/lire-avec-pio.apk
+          if-no-files-found: error
